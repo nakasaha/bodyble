@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<link rel="stylesheet" th:href="@{/css/profileRegistration.css}">
+</head>
+
+<body>
+	<form th:action="@{/editProfile}" th:object="${account}" method="post">
+		<h2>ユーザー情報編集</h2>
+		<span class="error" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">エラー</span>
+		<span class="error" th:if="${#fields.hasErrors('accountPassword')}" th:errors="*{accountPassword}"></span>
+		<span class="error" th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}"></span>
+
+
+		<label for="username">ユーザー名</label>
+		<input type="text" th:field="*{username}">
+
+		<label for="gender">性別</label>
+		<input type="text"  th:field="*{gender}">
+			
+		<label>生年月日</label>
+		<div class="birthday-select">
+			<select th:field="*{birthYear}" >
+				<option th:value="''">年</option>
+				<option th:each="year : ${#numbers.sequence(1900, 2025)}"
+				        th:value="${year}" th:text="${year}" ></option>
+			</select>
+			<select th:field="*{birthMonth}">
+				 <option th:value="''">月</option>
+				 <option th:each="month : ${#numbers.sequence(1, 12)}"
+				         th:value="${month}" th:text="${month}" ></option>
+			</select>
+			<select th:field="*{birthDay}">
+				 <option th:value="''">日</option>
+				 <option th:each="day : ${#numbers.sequence(1, 31)}"
+				         th:value="${day}" th:text="${day}" ></option>
+			</select>
+		</div>
+		
+		<label>現在のパスワード</label>
+		<input type="password" name="crp">
+		
+		<label>新しいパスワード</label>
+		<input type="password" th:field="*{accountPassword}">
+
+		<label>パスワード(確認用)</label>
+		<input type="password" th:field="*{confirmPassword}">
+		
+		<button type="submit" class="btn" id="submitBtn">完了</button>
+	</form>
+
+
+</body>
+
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>登録内容の確認</title>
+	<link rel="stylesheet" th:href="@{/css/profileComplete.css}">
+</head>
+<body>
+    <h1>登録内容の確認</h1>
+
+    <div class="confirmation-box">
+        <p><strong>名前：</strong><span th:text="${account.username}"></span></p>
+        <p><strong>性別：</strong>
+            <span th:if="${account.gender == 'M'}">男性</span>
+            <span th:if="${account.gender == 'F'}">女性</span>
+        </p>
+        <p><strong>生年月日：</strong><span th:text="${account.birthdate}"></span></p>
+        <p><strong>パスワード：</strong>********</p> 
+    </div>
+
+    <div class="button-group">
+        <form th:action="@{/register}" method="get">
+            <button type="submit">修正する</button>
+        </form>
+
+        <form th:action="@{/complete}" method="post" th:object="${account}">
+            <input type="hidden" th:field="*{username}">
+            <input type="hidden" th:field="*{gender}">
+            <input type="hidden" th:field="*{birthdate}">
+            <input type="hidden" th:field="*{accountPassword}">
+            <button type="submit">登録する</button>
+        </form>
+    </div>
+</body>
+</html>

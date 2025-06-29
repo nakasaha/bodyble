@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+</head>
+
+<body>
+	<div class="modal-overlay" id="modalOverlay">
+		<div class="modal">
+			<p>登録が完了しました。</p>
+			<button class="btn" id="modalClose">閉じる</button>
+		</div>
+	</div>
+
+	<script>
+		document.querySelectorAll('input[disabled]').forEach(elem => {
+			elem.addEventListener('click', function (e) {
+				e.preventDefault();
+				alert('編集できません。');
+			});
+		});
+
+		const form = document.getElementById('editForm');
+		const modalOverlay = document.getElementById('modalOverlay');
+		const modalClose = document.getElementById('modalClose');
+
+		form.addEventListener('submit', function (e) {
+			e.preventDefault();
+			// ここでパスワードと確認用パスワードの一致チェック
+			const pwd = document.getElementById('password').value;
+			const confirmPwd = document.getElementById('confirmPassword').value;
+			if (pwd !== confirmPwd) {
+				alert('パスワードが一致しません。');
+				return;
+			}
+
+			modalOverlay.style.display = 'flex';
+		});
+
+		modalClose.addEventListener('click', function () {
+			modalOverlay.style.display = 'none';
+			location.href = '@{/myPage}'
+		});
+	</script>
+</body>
+
+</html>

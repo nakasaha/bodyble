@@ -1,0 +1,107 @@
+@charset "UTF-8";
+
+:root {
+  --header-h: 60px;        
+}
+
+body {
+	font-family: Arial, sans-serif;
+	background: #f4f4f4;
+	padding:  calc(var(--header-h) + 20px) 20px 20px;
+}
+
+.form-container {
+	background: #fff;
+	padding: 20px;
+	border-radius: 8px;
+	max-width: 500px;
+	margin: auto;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+	margin-bottom: 15px;
+}
+
+label {
+	display: block;
+	margin-bottom: 5px;
+}
+
+input[type=text],
+input[type=password],
+input[type=date] {
+	width: 100%;
+	padding: 8px;
+	box-sizing: border-box;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+}
+
+input[disabled] {
+	background: #e9ecef;
+	cursor: not-allowed;
+}
+
+.btn {
+	display: inline-block;
+	padding: 10px 20px;
+	border: none;
+	border-radius: 4px;
+	background: #007bff;
+	color: #fff;
+	cursor: pointer;
+}
+
+.btn:disabled {
+	background: #999;
+	cursor: not-allowed;
+}
+
+/* Modal styles */
+.modal-overlay {
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.5);
+	justify-content: center;
+	align-items: center;
+}
+
+.modal {
+	background: #fff;
+	padding: 20px;
+	border-radius: 8px;
+	max-width: 300px;
+	text-align: center;
+}
+
+.modal button {
+	margin-top: 15px;
+}
+
+.birthday-select {
+  display: flex;
+  gap: 0.5rem;            
+  align-items: center;    
+}
+
+.birthday-select select {
+  appearance: none;       
+  padding: 0.4rem 0.6rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 0.25rem;
+  background-color: #fff;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.birthday-select select:focus {
+  outline: none;
+  border-color: #66afe9;
+  box-shadow: 0 0 0 0.2rem rgba(102,175,233,0.3);
+}

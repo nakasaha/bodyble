@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" th:href="@{/css/profileRegistration.css}">
+</head>
+<body>
+	<form th:action="@{/confirm}" th:object="${account}" method="post">
+	    <h1>ユーザー登録</h1>
+		<span class="error" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">エラー</span>
+		<span class="error" th:if="${#fields.hasErrors('birthdate')}" th:errors="*{birthdate}"></span>
+		<span class="error" th:if="${#fields.hasErrors('accountPassword')}" th:errors="*{accountPassword}"></span>
+
+		
+	    <label for="username">ユーザー名</label>
+	    <input type="text" id="username" th:field="*{username}" placeholder="ユーザー名を入力" >
+		
+		
+	    <label>性別</label>
+	    <div class="gender-options">
+	      <input type="radio" th:field="*{gender}" value="M" >男性
+	      <input type="radio" th:field="*{gender}" value="F">女性
+	    </div>
+		
+		<label>生年月日</label>
+		<div class="birthday-select">
+		  <select th:field="*{birthYear}" >
+		    <option value="">年</option>
+		    <option th:each="year : ${#numbers.sequence(1900, 2025)}"
+		            th:value="${year}" th:text="${year}"></option>
+		  </select>
+		  <select th:field="*{birthMonth}">
+		    <option value="">月</option>
+		    <option th:each="month : ${#numbers.sequence(1, 12)}"
+		            th:value="${month}" th:text="${month}"></option>
+		  </select>
+		  <select th:field="*{birthDay}">
+		    <option value="">日</option>
+		    <option th:each="day : ${#numbers.sequence(1, 31)}"
+		            th:value="${day}" th:text="${day}"></option>
+		  </select>
+		</div>
+		
+	    <label for="accountPassword">パスワード</label>
+	    <input type="password" id="accountPassword" th:field="*{accountPassword}" placeholder="パスワードを入力" > 
+
+		
+	    <label for="confirm_password">パスワード（確認用）</label>
+	    <input type="password" id="confirm_password" th:field="*{confirmPassword}" placeholder="確認用パスワードを入力" >
+		
+
+	    <button type="submit" name="action" value="back">もどる</button>
+	    
+		<button type="submit" name="action" value="confirm">確認する</button>
+	  </form>
+
+</body>
+</html>
