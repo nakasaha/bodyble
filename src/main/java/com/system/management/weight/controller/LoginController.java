@@ -17,7 +17,7 @@ public class LoginController {
 	@Autowired
 	private UserInformationService service;
 	
-	@GetMapping("/")
+	@GetMapping("/login")
 	public String getLogin(Model model) {
 		/*
 		 * ログイン画面へ遷移
