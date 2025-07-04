@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -20,12 +21,18 @@ public class AccountRepository {
 
 	public AccountEntity selectByName(String username) {
 		String sql = "SELECT * FROM user_account WHERE username = ?";
-		AccountEntity account = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(AccountEntity.class),
-				username);
-		if (account == null) {
+		
+		/*
+		 * 0行返ってきたときの例外処理
+		 */
+		try {
+			AccountEntity account = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(AccountEntity.class),
+					username);
+			return account;
+		}catch(EmptyResultDataAccessException e) {
 			return null;
-		}
-		return account;
+		}		
+		
 	}
 
 	public List<WeightRecordEntity> selectAll(String userName) {
