@@ -1,70 +1,121 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-<meta charset="UTF-8">
-<title>体重入力</title>
-<link rel="stylesheet" th:href="@{/css/weightInput.css}">
+	<meta charset="UTF-8">
+	<title>体重入力</title>
+	<link rel="stylesheet" th:href="@{/css/weightInput.css}">
+	<style>
+		#currentDate {
+			cursor: pointer;
+		}
+
+		#datePicker {
+			display: none;
+		}
+	</style>
 </head>
 
 <body>
 
-<header>
-  <div class="menu-icon" id="menuBtn">
-    <svg viewBox="0 0 24 24">
-      <path d="M3 6h18M3 12h18M3 18h18"
-            stroke="#fff" stroke-width="2" stroke-linecap="round"/>
-    </svg>
-  </div>
-  <h2>体重入力</h2>
-</header>
+	<header>
+		<div class="menu-icon" id="menuBtn">
+			<svg viewBox="0 0 24 24">
+				<path d="M3 6h18M3 12h18M3 18h18" stroke="#fff" stroke-width="2" stroke-linecap="round" />
+			</svg>
+		</div>
+		<h2>体重入力</h2>
+	</header>
 
-<nav class="sidebar" id="sidebar">
-  <a th:href="@{/editProfile}">ユーザー情報編集</a>
-  <a th:href="@{/myPage}">マイページ</a>
-  <a th:href="@{/logout}">ログアウト</a>
-</nav>
+	<nav class="sidebar" id="sidebar">
+		<a th:href="@{/editProfile}">ユーザー情報編集</a>
+		<a th:href="@{/myPage}">マイページ</a>
+		<a th:href="@{/logout}">ログアウト</a>
+	</nav>
 
-<main>
-  <form th:action="@{/weightConfirm}"
-        th:object="${weightRecord}"
-        method="post">
+	<main>
+		<form th:action="@{/weightConfirm}" th:object="${weightRecord}" method="post">
 
-    <div class="date-picker">
-      <button type="button" id="prevDate">&#9664;</button>
-      <span id="currentDate">0000‑00‑00</span>
-      <button type="button" id="nextDate">&#9654;</button>
-    </div>
+			<div class="date-picker">
+				<button type="button" id="prevDate">&#9664;</button>
 
-    <div class="weight-box">
-      <input type="number" id="weight" name="weight"
-             step="0.1" th:field="*{weight}" required>
-      <span>kg</span>
-    </div>
+				<span id="currentDate" title="クリックで日付を変更">0000‑00‑00</span>
 
-    <input type="hidden" id="date"
-           name="recordDate" th:field="*{recordDate}">
-    <button class="submit-btn" type="submit">登録</button>
-  </form>
-</main>
+				<input type="date" id="datePicker">
 
-<script>
-document.getElementById('menuBtn')
-        .addEventListener('click',()=>document
-          .getElementById('sidebar')
-          .classList.toggle('open'));
+				<button type="button" id="nextDate">&#9654;</button>
+			</div>
 
-const hidden = document.getElementById('date');
-const disp   = document.getElementById('currentDate');
-let current  = new Date();
+			<div class="weight-box">
+				<input type="number" id="weight" name="weight" step="0.1" th:field="*{weight}" required>
+				<span>kg</span>
+			</div>
 
-const fmt=d=>`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
-const render=()=>{const s=fmt(current);disp.textContent=s;hidden.value=s;};
+			<input type="hidden" id="date" name="recordDate" th:field="*{recordDate}">
 
-document.getElementById('prevDate').onclick=()=>{
-  current.setDate(current.getDate()-1);render();};
-document.getElementById('nextDate').onclick=()=>{
-  current.setDate(current.getDate()+1);render();};
-render();
-</script>
+			<button class="submit-btn" type="submit">登録</button>
+		</form>
+	</main>
+
+	<script>
+		document.getElementById('menuBtn')
+			.addEventListener('click', () =>
+				document.getElementById('sidebar').classList.toggle('open'));
+
+		
+		const hidden = document.getElementById('date');       
+		const dispSpan = document.getElementById('currentDate'); 
+		const picker = document.getElementById('datePicker');  
+		let current = new Date();                             
+
+		const fmt = d =>
+			`${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+
+		const render = () => {
+			const s = fmt(current);
+			dispSpan.textContent = s;
+			hidden.value = s;
+		};
+
+		document.getElementById('prevDate').onclick = () => {
+			current.setDate(current.getDate() - 1);
+			render();
+		};
+		document.getElementById('nextDate').onclick = () => {
+			current.setDate(current.getDate() + 1);
+			render();
+		};
+
+		dispSpan.addEventListener('click', () => {
+			picker.value = hidden.value;
+			picker.style.display = 'inline-block';
+			picker.focus();
+			setTimeout(() => {
+			    if (picker.showPicker) {
+			      picker.showPicker();          
+			    } else {
+			      picker.click();               
+			    }
+			  }, 0);
+		});
+
+		const closePicker = () => {
+			picker.style.display = 'none';
+		};
+
+		
+		picker.addEventListener('change', () => {
+			if (picker.value) {            
+				current = new Date(picker.value);
+				render();
+			}
+			closePicker();
+		});
+
+		picker.addEventListener('blur', closePicker);
+
+		render(); 
+	</script>
 </body>
+
 </html>
