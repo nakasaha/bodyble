@@ -1,0 +1,155 @@
+@charset "UTF-8";
+
+:root {
+	--primary: #00c4d6;
+	--primary-dark: #009eae;
+	--sidebar-bg: #f1f3f4;
+	--text-main: #333;
+	--header-h: 60px;
+}
+
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0
+}
+
+body {
+	font-family: "Segoe UI", "Noto Sans JP", sans-serif;
+	color: var(--text-main);
+	background: #fafafa;
+}
+
+header {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: var(--header-h);
+	background: var(--primary);
+	display: flex;
+	align-items: center;
+	padding: 0 20px;
+	z-index: 100;
+}
+
+header h2 {
+	margin-left: 48px;
+	font-size: 1.25rem;
+	color: #fff
+}
+
+.menu-icon {
+	width: 30px;
+	height: 30px;
+	cursor: pointer
+}
+
+.menu-icon svg {
+	width: 100%;
+	height: 100%
+}
+
+.sidebar {
+	position: fixed;
+	top: var(--header-h);
+	left: 0;
+	height: calc(100% - var(--header-h));
+	width: 220px;
+	background: var(--sidebar-bg);
+	padding-top: 20px;
+	transform: translateX(-100%);
+	transition: transform .3s ease;
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+}
+
+.sidebar.open {
+	transform: translateX(0)
+}
+
+.sidebar a {
+	padding: 12px 20px;
+	text-decoration: none;
+	color: var(--text-main);
+	transition: background .2s;
+}
+
+.sidebar a:hover {
+	background: rgba(0, 0, 0, .06)
+}
+
+/* ===== 体重入力専用スタイル ===== */
+main {
+	padding-top: calc(var(--header-h) + 40px);
+	padding-left: 20px;
+	padding-right: 20px;
+	max-width: 600px;
+	margin: auto;
+	text-align: center;
+}
+
+.date-picker {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 24px;
+	margin-bottom: 32px;
+}
+
+.date-picker button {
+	background: none;
+	border: none;
+	font-size: 2rem;
+	font-weight: 700;
+	cursor: pointer;
+	user-select: none;
+}
+
+.date-picker span {
+	font-size: 2.2rem;
+	font-weight: 700;
+}
+
+.weight-box {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 12px;
+	margin-bottom: 40px;
+}
+
+.weight-box input {
+	width: 160px;
+	height: 90px;
+	font-size: 2rem;
+	text-align: center;
+	border: 2px solid #000;
+	border-radius: 12px;
+	outline: none;
+}
+
+.weight-box span {
+	font-size: 2rem;
+	font-weight: 700
+}
+
+.submit-btn {
+	padding: 10px 40px;
+	border: none;
+	cursor: pointer;
+	border-radius: 20px;
+	background: var(--primary);
+	color: #fff;
+	font-size: 1rem;
+	transition: background .2s, transform .1s;
+}
+
+.submit-btn:hover {
+	background: var(--primary-dark)
+}
+
+.submit-btn:active {
+	transform: translateY(2px)
+}

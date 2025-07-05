@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.system.management.weight.entity.AccountEntity;
 import com.system.management.weight.entity.WeightRecordEntity;
@@ -12,7 +13,7 @@ import com.system.management.weight.repository.AccountRepository;
 import lombok.RequiredArgsConstructor;
 
 @Service
-
+@Transactional
 @RequiredArgsConstructor
 public class UserInformationService implements UserInformationEditService {
 
@@ -60,6 +61,7 @@ public class UserInformationService implements UserInformationEditService {
 	/*
 	 * 体重アップデート
 	 */
+	@Override
 	public void weightUpdate(WeightRecordEntity entity) {
 		repository.updateWeight(entity);
 	}
@@ -67,6 +69,7 @@ public class UserInformationService implements UserInformationEditService {
 	/*
 	 * すでに登録済みの日付か確認
 	 */
+	@Override
 	public WeightRecordEntity findByNameAndDate(String name,Date recordDate) {
 
 		return repository.findByNameAndDate(name,recordDate);

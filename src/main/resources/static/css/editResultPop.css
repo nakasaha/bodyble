@@ -1,0 +1,61 @@
+@charset "UTF-8";
+
+.modal-overlay {
+	display: none;
+	/* 初期は非表示 */
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	background: rgba(0, 0, 0, 0.5);
+	z-index: 1000;
+	/* ここが大事！flexコンテナにする */
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+/* “非表示” 状態用クラス */
+.hidden {
+	display: none !important;
+}
+
+/* モーダル本体 */
+.modal {
+	background: white;
+	border-radius: 10px;
+	padding: 30px;
+	width: 90%;
+	max-width: 400px;
+	box-sizing: border-box;
+	text-align: center;
+}
+
+.field {
+	margin-bottom: 15px;
+	text-align: left;
+}
+
+.label {
+	font-weight: bold;
+}
+
+.value {
+	margin-top: 5px;
+}
+
+.home-button {
+	background-color: #00c4d6;
+	color: white;
+	padding: 10px 25px;
+	border: none;
+	border-radius: 5px;
+	font-size: 16px;
+	cursor: pointer;
+	margin-top: 20px;
+}
+
+.home-button:hover {
+	background-color: #009eae;
+}

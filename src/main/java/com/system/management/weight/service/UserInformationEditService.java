@@ -1,5 +1,6 @@
 package com.system.management.weight.service;
 
+import java.sql.Date;
 import java.util.List;
 
 import com.system.management.weight.entity.AccountEntity;
@@ -20,4 +21,7 @@ public interface UserInformationEditService {
 	
 	void delete(Integer id);
 	
+	void weightUpdate(WeightRecordEntity entity);
+	
+	WeightRecordEntity findByNameAndDate(String name,Date recordDate);
 }
